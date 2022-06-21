@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    Test App
+    
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-messaging.js"
+
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDQR3fYiwYbCXvBH5v0NbCWl96q3WdYEso",
+            authDomain: "lala-4fa84.firebaseapp.com",
+            projectId: "lala-4fa84",
+            storageBucket: "lala-4fa84.appspot.com",
+            messagingSenderId: "557572820125",
+            appId: "1:557572820125:web:1e93b5cece769d1ce51874"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const messaging = getMessaging(app);
+       
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./firebase-messaging-sw.js')
+            .then((m) => {
+                console.log(1)
+                getToken(messaging, { vapidKey: 'BPLzofk6jjXOEOJB26DSbMLMfeKTxMqK-gVLR51lp1f0xOtoBsExAAfC8GYOZDvMmeG-MhEJ3ABYv43g4-5D4Ok' }).then((currentToken) => {
+                if (currentToken) {
+                    console.log(currentToken)
+                    // ...
+                } else {
+                    console.log('No registration token available. Request permission to generate one.');
+                    // ...
+                }
+            })
+            }).catch((e) => {
+                console.log("service worker " +e) 
+            });
+    }
+        
+
+
+      </script>
+   
+</body>
+</html>
